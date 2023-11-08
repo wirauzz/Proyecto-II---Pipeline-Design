@@ -1,0 +1,20 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
+
+name: savecorrelation7
+display_name: savecorrelation7
+type: command
+
+inputs:
+  data_set_cleaned:
+    type: uri_file
+
+outputs:
+  correlation_img:
+    type: uri_folder
+
+environment: azureml:AzureML-sklearn-1.0-ubuntu20.04-py38-cpu:1
+code: ./save_correlation_src
+command: >-
+  python save_correlation.py 
+  --data_set_cleaned ${{inputs.data_set_cleaned}} 
+  --correlation_img ${{outputs.correlation_img}} 

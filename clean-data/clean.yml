@@ -1,0 +1,20 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
+
+name: clean-data-2
+display_name: cleaning 2
+type: command
+
+inputs:
+  standard_data:
+    type: uri_file
+
+outputs:
+  cleaned_data:
+    type: uri_file
+
+environment: azureml:AzureML-sklearn-1.0-ubuntu20.04-py38-cpu:1
+code: ./clean_src
+command: >-
+  python clean.py 
+  --standard_data ${{inputs.standard_data}} 
+  --cleaned_data ${{outputs.cleaned_data}}

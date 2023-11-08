@@ -1,0 +1,23 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
+
+name: score3
+display_name: score3
+type: command
+
+inputs:
+  model_input:
+    type: uri_file
+  x_test:
+    type: uri_file
+
+outputs:
+  y_pred:
+    type: uri_file
+
+environment: azureml:AzureML-sklearn-1.0-ubuntu20.04-py38-cpu:1
+code: ./score_src
+command: >-
+  python score.py 
+  --model_input ${{inputs.model_input}} 
+  --x_test ${{inputs.x_test}}
+  --y_pred ${{outputs.y_pred}}
